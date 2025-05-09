@@ -1,10 +1,10 @@
 import axios from "axios";
 import axiosRetry from "axios-retry";
+import mongoose from "mongoose";
 import {decode} from "html-entities";
 
 import {Category, Question} from "./src/types";
 import {CategoryModel, QuestionModel} from "./src/models";
-import mongoose from "mongoose";
 
 async function delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
