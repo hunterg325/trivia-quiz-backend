@@ -18,7 +18,7 @@ mongoose.connect('mongodb://localhost:27017/trivia', {
     useUnifiedTopology: true,
 } as mongoose.ConnectOptions);
 
-// API Endpoints
+// Endpoints
 app.get('/api/categories', async (req: Request, res: Response) => {
     try {
         const categories = await CategoryModel.find({}, 'id name');
@@ -27,9 +27,6 @@ app.get('/api/categories', async (req: Request, res: Response) => {
         res.status(500).json({ error: 'Failed to fetch categories' });
     }
 });
-app.get('/', (req, res) => {
-    res.send('hello world')
-})
 
 app.get('/api/quiz', async (req: Request, res: Response) => {
     const category = req.query.category;
