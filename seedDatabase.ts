@@ -25,8 +25,6 @@ async function seedDatabase(): Promise<void> {
         await CategoryModel.deleteMany({});
         await QuestionModel.deleteMany({});
 
-        console.log('this also hit?');
-
         axiosRetry(axiosInstance, {
             retries: 3, // Number of retries
             retryDelay: (retryCount) => {
