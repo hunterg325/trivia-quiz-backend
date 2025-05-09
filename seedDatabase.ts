@@ -1,8 +1,10 @@
-import {CategoryModel, QuestionModel} from "./src/models";
-import axiosRetry from "axios-retry";
 import axios from "axios";
-import {Category, Question} from "./src/types";
+import axiosRetry from "axios-retry";
 import {decode} from "html-entities";
+
+import {Category, Question} from "./src/types";
+import {CategoryModel, QuestionModel} from "./src/models";
+import mongoose from "mongoose";
 
 async function delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -10,12 +12,20 @@ async function delay(ms: number) {
 
 const axiosInstance = axios.create({});
 
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/trivia', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+} as mongoose.ConnectOptions);
+
 // Seed Database from opentdb
 async function seedDatabase(): Promise<void> {
     try {
         // Clear DB if not already
         await CategoryModel.deleteMany({});
         await QuestionModel.deleteMany({});
+
+        console.log('this also hit?');
 
         axiosRetry(axiosInstance, {
             retries: 3, // Number of retries
