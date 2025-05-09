@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express';
+import cors from 'cors';
 import mongoose from 'mongoose';
 import axios from 'axios';
 import axiosRetry from "axios-retry";
@@ -23,6 +24,7 @@ interface Question {
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/trivia', {
